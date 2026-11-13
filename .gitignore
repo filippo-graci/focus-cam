@@ -1,0 +1,9 @@
+config.toml
+music/
+models/
+__pycache__/
+sessions.jsonl
+focus.log
+.status
+.status.json
+.mode

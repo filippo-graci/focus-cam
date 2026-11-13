@@ -1,0 +1,46 @@
+camera = 0                # /dev/videoN index; try 1 if 0 is the IR camera
+calibration_seconds = 3
+pitch_tolerance = 8       # degrees of head up/down allowed vs calibrated pose (phone ≈ +11)
+yaw_tolerance = 25        # degrees of head left/right allowed
+eye_tolerance = 0.25      # eyes looking down vs calibration (0..1; screen ≈ 0, phone ≈ +0.44)
+paper_pitch_tolerance = 30  # with `focus paper` on (writing on paper while reading the screen):
+paper_eye_tolerance = 0.8   # wider up/down margins; yaw stays as above. Note: the phone passes too
+glance_seconds = 3        # looking away for less than this (typing, the keyboard) still counts as focused
+away_seconds = 3         # no face this long (while on screen) -> pause everything
+lost_seconds = 60         # face vanishes right after looking away (head down to phone):
+                          # still distracted this long, then counts as away
+
+[telegram]                # used by hard mode; leave empty to disable
+token = ""                # from @BotFather (or set env FOCUS_TG_TOKEN)
+chat_id = ""              # your chat id (message the bot, then see README)
+
+[sync]                    # after each session, upload sessions.jsonl to the learn_ai app (Focus tab); url = "" disables
+url = ""
+key_file = "~/Workspace/learn_ai/android/local.properties"   # the app key, line learnai.key=...
+
+# grace  = seconds looking away before the first nag
+# repeat = seconds between nags while still looking away
+# volume = music volume 0..1
+# sound  = nag sound file (ogg/oga/wav/mp3); absolute, or relative to this folder (e.g. "sounds/ding.ogg")
+# sound_volume = nag sound volume 0..1
+# More system sounds: ls /usr/share/sounds/Yaru/stereo /usr/share/sounds/freedesktop/stereo
+[modes.soft]
+grace = 20
+repeat = 30
+volume = 0.5
+sound = "/usr/share/sounds/Yaru/stereo/message.oga"
+sound_volume = 0.5
+
+[modes.focus]
+grace = 8
+repeat = 15
+volume = 0.7
+sound = "/usr/share/sounds/Yaru/stereo/dialog-question.oga"
+sound_volume = 0.6
+
+[modes.hard]
+grace = 3
+repeat = 5
+volume = 0.9
+sound = "/usr/share/sounds/freedesktop/stereo/phone-incoming-call.oga"
+sound_volume = 0.8
