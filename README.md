@@ -53,7 +53,7 @@ No face for 3 s pauses the music. It resumes when the face returns. All timings 
 
 ## Stats on the phone
 
-Each session appends one line per mode stretch to `sessions.jsonl` (start, end, mode, seconds focused/distracted/away, nags). Stretches shorter than 30 s are skipped. After each session the whole file goes up to the learn_ai app (`[sync]` in `config.toml`; the key comes from `~/Workspace/learn_ai/android/local.properties`). If an upload fails, the next session makes up for it, since every upload sends the whole file.
+Each session appends one line per mode stretch to `sessions.jsonl` (start, end, mode, seconds focused/distracted/away, nags). Stretches shorter than 30 s are skipped. After each session the whole file can go up to the [learn-ai](https://github.com/filippo-graci/learn-ai) app (`[sync]` in `config.toml`; the key comes from `~/Workspace/learn_ai/android/local.properties`). Sync is off while `url` is empty, as in `config.example.toml`. If an upload fails, the next session makes up for it, since every upload sends the whole file.
 
 In the app, the 📈 Stats tab shows week and month levels, the streak, charts, and every session with a time bar. Each session also gets a dot for time on screen: green at 80% or more, yellow at 60 to 79%, red below 60%.
 
@@ -66,3 +66,19 @@ Run `uv run focus.py focus --preview` at the real desk. A glance at the phone mo
 For taking notes on paper while reading the screen, run `focus paper` (or press Paper in the app). This swaps `pitch_tolerance` / `eye_tolerance` for `paper_pitch_tolerance` / `paper_eye_tolerance` (30° / 0.8). Turning the head sideways still counts. It stays on across mode switches until toggled again or restarted. While it's on, the phone passes too, so turn it off after writing. To tune it, write with the preview open and set the paper values just above the readings. If the face disappears while writing, it counts as away.
 
 `uv run test_focus.py` runs a self-check of the state machine.
+
+## Part of a larger system
+
+focus-cam is one of three projects that run on the same laptop and show up in the same phone app:
+
+| Project | Role |
+|---|---|
+| [learn-ai](https://github.com/filippo-graci/learn-ai) | Book pipeline and the Android app that shows all three; these sessions appear in its Stats tab |
+| [local_ai_news](https://github.com/filippo-graci/local_ai_news) | Morning Brief: a daily news digest made with local models, shown in the app's News tab |
+| **focus-cam** (this repo) | Webcam focus guard |
+
+Any project can still be used alone.
+
+## License
+
+MIT
